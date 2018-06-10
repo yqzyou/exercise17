@@ -2,7 +2,7 @@
  * @Author: kael 
  * @Date: 2018-02-01 17:41:25 
  * @Last Modified by: kael
- * @Last Modified time: 2018-02-02 17:51:37
+ * @Last Modified time: 2018-02-02 17:38:36
  */
 
 class ObserverList {
@@ -11,15 +11,16 @@ class ObserverList {
   }
   add(observer) {
     return this.observerList.push(observer);
+    // todo add observer to list
   }
   remove(observer) {
-    this.observerList = this.observerList.filter(ob => ob !== observer);
+    let index = this.observerList.indexOf(observer);
+    this.observerList.splice(index,1);
+    // todo remove observer from list
   }
   count() {
     return this.observerList.length;
-  }
-  get(index) {
-    return this.observerList[index];
+    // return observer list size
   }
 }
 
@@ -29,15 +30,17 @@ class Subject {
   }
   addObserver(observer) {
     this.observers.add(observer);
+    // todo add observer
   }
   removeObserver(observer) {
     this.observers.remove(observer);
+    // todo remove observer
   }
   notify(...args) {
-    let observerCount = this.observers.count();
-    for (let i = 0; i < observerCount; i++) {
-      this.observers.get(i).update(...args);
-    }
+    this.observers.forEach(obj => {
+      obj.update(...args);
+    });
+    // todo notify
   }
 }
 
